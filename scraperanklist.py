@@ -3,9 +3,13 @@ import lxml.html as lh
 from bs4 import BeautifulSoup
 import csv
 
-url='http://www.relianceiccrankings.com/datespecific/odi/?stattype=bowling&day=01&month=10&year=2013'
+#have to use BeautifulSoup for this one in addition to lxml because of...
+#pesky flag images that I needed to convert into country prefixes.. you'll see
 
-print('10-12 2013')
+url='http://www.relianceiccrankings.com/[insert rest of url here]'
+
+#some kind of heading for the scraped data
+print('Top 100 bowlers Jan 2013')
 
 page = requests.get(url)
 
@@ -16,6 +20,8 @@ tr_elements = doc.xpath('//tr')
 
 soup = BeautifulSoup(requests.get(url).text, 'lxml')
 
+#ok, this basically creates a strange array that allows me to...
+#get each player's country as part of the entry... sorry that it's confusing
 special = soup.find_all('td', {'class': 'top100nation'})
 
 data_array = [[] for _ in range(len(tr_elements))]
@@ -27,11 +33,11 @@ for t in tr_elements[0]:
 	if i == 4:
 		continue
 	name=t.text_content()
-	print(name)
 	data_array[0].append(name)
 	i+=1
 
-#printing out first row of table, to check correctness
+#printing out first row of table, to check correctness.. 
+#obviously should see the column names
 print(data_array[0])
 							
 for j in range(1,len(tr_elements)):
@@ -48,16 +54,18 @@ for j in range(1,len(tr_elements)):
 			data=t.text_content()
 		#image-based column
 		else:
+			#'special[j-1]['title']' is the address for the national prefix..
+			#(that is, 'AUS', 'IND', etc) for the player in question
 			data = special[j-1]['title']
 
 		data_array[j].append(data)
 		i+=1
 
-#printing last row to check correctness
+#printing last row to check correctness. should see final entry
 print(data_array[len(tr_elements)-1])
 
 
-with open('list3,13','w') as file:
+with open('[insert cute textfile filename here]','w') as file:
 	writer = csv.writer(file)
 
 	for i in range(0,len(tr_elements)):
