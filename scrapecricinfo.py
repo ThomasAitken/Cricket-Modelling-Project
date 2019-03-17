@@ -10,7 +10,7 @@ doc = lh.fromstring(page.content)
 
 tr_elements = doc.xpath('//tr')
 
-#deleting first 6 elements, because there are table row elements (with '//tr' signature in html) above the table per se. 
+#deleting first few elements, because there are table row elements (with '//tr' signature in html) above the table per se. 
 #how many elements you need to delete actually depends on what you searched on Statsguru, unfortunately.. tinkering necessary
 del tr_elements[:6]
 
