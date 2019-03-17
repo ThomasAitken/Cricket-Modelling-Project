@@ -14,7 +14,7 @@ tr_elements = doc.xpath('//tr')
 #how many elements you need to delete actually depends on what you searched on Statsguru, unfortunately.. tinkering necessary
 del tr_elements[:6]
 
-#deleting last 5 elements. same caveat applies as above
+#deleting several more elements from end. same caveat applies as above
 del tr_elements[-10:]
 
 data_array = [[] for _ in range(len(tr_elements))]
