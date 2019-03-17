@@ -1,12 +1,9 @@
-#how to get a measure of batting or bowling strength? why it's simple!
-#take top-100 rankings list at given period... what is score held by #1 player?
-#normalise against this score (i.e. this score now equivalent to 1)
-#add up top 8 normalised scores for each nation's top 8 players in top 100
-#(8 an arbitrary number yes, but seems to be fair, on the evidence
-#(8 players in top 100 means good depth, but above 8 we just bias nations...
-#that chop and change, and ingrain bias against minnows))
-#now we normalise against nation with highest total of normalised scores..
-#this nation has overall bowling/batting strength 1... others have 0.a
+#how to get a measure of batting or bowling strength? why it's simple! take top-100 rankings list at given period... 
+#what is score held by #1 player? normalise against this score (i.e. this score now equivalent to 1)
+#now add up top 8 normalised scores for each nation's top 8 players in top 100 (set x: 0 <= x <= 1) . 
+#(8 an arbitrary number yes, but seems to be fair, on the evidence (8 players in top 100 means good depth, but above 8...
+#we just bias nations that chop and change, and ingrain bias against minnows))
+#now we normalise against nation with highest total of normalised scores. this nation has overall strength 1. others have 0.a
 
 import csv
 
@@ -25,9 +22,8 @@ with open('[insert cute name for list of 100 rankings here]') as file:
 			topValue = int(row[1])
 			print('[insert cute heading for output here]\n' + row[1])
 			j += 1
-		#excluding the super miniature minnows... these three countries are the ones to ...
-		#leave out from 2011-2013, but the last three in the dict should be swapped..
-		#with these three for the years 2014-the present
+		#excluding the super miniature minnows... these three countries are the ones to leave out from 2011-2013.
+		#but the last three in the dict should be swapped with these three for the years 2014-the present
 		if row[3] == 'P.N.G.' or row[3] == 'U.A.E.' or row[3] == 'H.K.':
 			continue
 		x = maindict[row[3]]
@@ -36,7 +32,7 @@ with open('[insert cute name for list of 100 rankings here]') as file:
 			x[0] += normalValue
 			x[1] += 1
 
-
+#printing the dict with raw scores of each nation as first element followed by # of players who contributed to the score
 print(maindict)
 print('\n')
 biggestValue = 0
@@ -46,8 +42,10 @@ for entries in maindict:
 		biggestValue = x
 
 for entries in maindict:
+	#normalising with respect to strongest nation
 	maindict[entries] = maindict[entries][0]/biggestValue
 
+#the output will now show us the dict with each nation's normalised strength-value first, followed by # of players again (unchanged)
 print(maindict)
 
 
