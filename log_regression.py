@@ -1,4 +1,9 @@
 #thank you to https://towardsdatascience.com/building-a-logistic-regression-in-python-step-by-step-becd4d56c9c8 for guidance
+#this program executes all the steps leading up to the final log_regression...
+#I split up my data into train and test, I encode my categorical variables properly...
+#Recursive feature elimination is used on the variables I do have..
+#The output of this process led me to update what columns I use for the final analysis
+#Then we do the final analysis... Then print out its accuracy and a confusion matrix
 
 import csv
 import pandas as pd
