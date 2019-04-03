@@ -72,7 +72,10 @@ rfe = rfe.fit(os_data_X, os_data_y.values.ravel())
 print(rfe.support_)
 print(rfe.ranking_)
 
-#the following variables are really the only ones that show up as having promise (neutral does also, but probably in large part because I encoded all of Pakistan's matches in the UAE as 'neutral' games)... Bigger analyses of ODI match data seem to show a slight advantage batting first in day-night games but this didn't show up in my data. Nevertheless, including the variable 'OrderType_1st. night' gives me a 1% prediction boost on my test data versus not including it
+#the following variables are really the only ones that show up as having promise 
+#(neutral does also, but probably in large part because I encoded all of Pakistan's matches in the UAE as 'neutral' games)... 
+#Bigger analyses of ODI match data seem to show a slight advantage batting first in day-night games...
+#but this didn't show up in my data. Nevertheless, including the variable 'OrderType_1st. night' gives me a 1% prediction boost on my test data versus not including it
 cols = ['RankAdvantage', 'BatAdvantage', 'BowlAdvantage', 'Home_home', 'OrderType_1st. night', 'OrderType_2nd. day']
 
 X = os_data_X[cols]
